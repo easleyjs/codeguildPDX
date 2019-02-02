@@ -10,7 +10,7 @@ Allow the user to choose how many characters the password will be.
 Advanced Version 2
 Allow the user to choose how many letters, numbers, and punctuation characters they want in their password. Mix everything up using list(), random.shuffle(), and ''.join().
 """
-from random import randint
+import random
 
 def getLetterList():
     return [chr(x) for x in (list(range(65,91)) + list(range(97,123)))]
@@ -29,19 +29,22 @@ def getRandomCharacters(charType,numChars):
         source_list = getNumberList()
     elif charType == 'punctuation':
         source_list = getPunctuationList()
-    return "".join([source_list[randint(0,len(source_list)-1)] for x in range(0,numChars)])
+    return [random.choice(source_list) for x in range(0,numChars)]
 
 passwordString = ""
+passwordCharList = []
 passwordLength = int(input("How many characters long would you like your password to be?: "))
 numLetters = int(input("How many letters would you like in your password?: "))
 numNumbers = int(input("How many numbers would you like in your password?: "))
 numPunctuation = int(input("How many punctuation characters would you like in your password?: "))
-
 if numNumbers > 0:
-    passwordString += getRandomCharacters('number',numNumbers)
+    passwordCharList += getRandomCharacters('number',numNumbers)
 if numLetters > 0:
-    passwordString += getRandomCharacters('letter',numLetters)
+    passwordCharList += getRandomCharacters('letter',numLetters)
 if numPunctuation > 0:
-    passwordString += getRandomCharacters('punctuation',numPunctuation)
+    passwordCharList += getRandomCharacters('punctuation',numPunctuation)
+
+random.shuffle(passwordCharList)
+passwordString = "".join(passwordCharList)
 
 print("Your password is: " + passwordString)
