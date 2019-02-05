@@ -34,14 +34,16 @@ Now we'll ask the user for the distance, the starting units, and the units to co
 
 """
 #Base Unit is Meters.
-unit_dict = {   'ft':0.3048,
+unit_dict = {   'in':0.0254,
+                'ft':0.3048,
                 'yd':0.9144,
                 'm':1,
-                'km':.001,
-                'mi':0.00062137119
+                'km':1000,
+                'mi':1609.34
+                #'mi':0.00062137119
 }
 distance = float(input("What is the distance?: "))
-startUnit = input("What is the unit? [ft/m/km/mi]: ")
-endUnit = input("What unit would you like to convert to? [m/km/mi]: ")
+startUnit = input("What is the unit? [in/ft/yd/m/km/mi]: ")
+endUnit = input("What unit would you like to convert to? [in/ft/yd/m/km/mi]: ")
 
-print("%s %s equals %s %s." % (distance,startUnit,round(distance*unit_dict[startUnit]*unit_dict[endUnit],4),endUnit))
+print("%s %s equals %s %s." % (distance,startUnit,round(distance*unit_dict[startUnit]/unit_dict[endUnit],4),endUnit))
