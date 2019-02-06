@@ -20,9 +20,9 @@ Version 2
 Ask the user to enter the numbers one at a time, putting them into a list. If the user enters 'done', then calculate and display the average. The following code demonstrates how to add an element to the end of a list.
 
 """
+##Version 2
 
-
-nums = [1,2,3,4,5]
+#nums = [1,2,3,4,5]
 
 def sumNumbers(numbers):
     sum = 0
@@ -30,6 +30,18 @@ def sumNumbers(numbers):
         sum += number
     return sum
 
-numberSum = sumNumbers(nums)
+numberList = []
 
-print("The average is %s" % (numberSum/len(nums)))
+continueAdding = True
+while continueAdding is True:
+    numberList.append(int(input("Input a number: ")))
+    shouldContinuePlaying = input("Do you want to continue adding numbers? [y/n]: ")
+    if shouldContinuePlaying == 'n':
+        continueAdding = False
+    else:
+        continue
+
+
+numberSum = sumNumbers(numberList)
+
+print("The average is %s" % (numberSum/len(numberList)))
