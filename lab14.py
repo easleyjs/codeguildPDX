@@ -29,28 +29,52 @@ Version 2
 The ROI (return on investment) is defined as (earnings - expenses)/expenses. Calculate your ROI, print it out along with your earnings and expenses.
 """
 import random
-balance = 0
-expenses = 0
-payout_dict = {
-    0:0,
-    1:4,
-    2:7,
-    3:100,
-    4:50000,
-    5:1000000,
-    6:25000000
-}
-for i in range(10000):
-    balance -= 2 #Buy a ticket.
-    expenses += 2
-    matchCounter = 0
-    winning_numbers = [random.randint(1,99) for i in range(0,6)]
-    pick_numbers = [random.randint(1,99) for i in range(0,6)]
-    for i in pick_numbers:
-        if i in winning_numbers:
-            print(f"Congratulations, you just won {payout_dict[matchCounter]} dollars!")
-            matchCounter += 1
-    balance += payout_dict[matchCounter]
 
-print(f"Your final balance is: ${balance}")
-print(f"You spent {expenses} for a total ROI of {balance-expenses}")
+def buyTickets(numTickets,payout_dict):
+    for i in range(numTickets):
+        balance -= 2 #Buy a ticket.
+        expenses += 2 #Add the cost of a ticket to expenses.
+        matchCounter = 0
+        winning_numbers = [random.randint(1,99) for i in range(0,6)]
+        pick_numbers = [random.randint(1,99) for i in range(0,6)]
+        for i in range(len(pick_numbers)):
+            if pick_numbers[i] == winning_numbers[i]:
+                matchCounter += 1
+        balance += payout_dict[matchCounter]
+
+        print(f"Your final balance is: ${balance}")
+        print(f"You spent {expenses} for a total ROI of {balance-expenses}")
+
+def calculate_odds(numMatches,payout_dict):
+    """
+    numMatches = what number of winning numbers you want to calculate the odds for.
+    """
+    winning_numbers = [random.randint(1,99) for i in range(0,6)]
+    tickets = 0
+    hasWonYet = False
+    while hasWonYet is False:
+        tickets += 1
+        pick_numbers = [random.randint(1,99) for i in range(0,6)]
+        matchCounter = 0
+        for i in range(len(pick_numbers)):
+            if pick_numbers[i] == winning_numbers[i]:
+                matchCounter += 1
+        if matchCounter >= numMatches:
+            hasWonYet = True
+    print(f"You bought {tickets} tickets to win {payout_dict[numMatches]}")
+def main():
+    balance = 0
+    expenses = 0
+    payout_dict = {
+        0:0,
+        1:4,
+        2:7,
+        3:100,
+        4:50000,
+        5:1000000,
+        6:25000000
+    }
+    calculate_odds(6,payout_dict)
+
+if __name__ == '__main__':
+    main()
