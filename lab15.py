@@ -45,7 +45,7 @@ tens_dict = {
                 9: 'ninety'
 }
 
-double_digit_dict = {
+teens_dict = {
                 11: 'eleven',
                 12: 'twelve',
                 13: 'thirteen',
@@ -73,8 +73,29 @@ def number_to_word(inputNumber):
     return hundredsWord + onesWord
 
 
-print(number_to_word(960))
-print(number_to_word(900))
-print(number_to_word(999))
-print(number_to_word(911))
-print(number_to_word(9))
+def num_to_word(inputNumber):
+    hundredsValue = tensValue = onesValue = 0
+    numWords = ""
+    if inputNumber > 99:
+        hundredsValue = inputNumber / 100
+        tensValue = inputNumber % 100 / 10
+        onesValue = inputNumber % 10
+        numWords = singles_dict[hundredsValue] + " hundred "
+    else:
+        tensValue = inputNumber / 10
+        onesValue = inputNumber % 10
+    if 10 < (tensValue + onesValue) < 20:
+        numWords += teens_dict[tensValue + onesValue]
+    else:
+        numWords += tens_dict[tensValue]
+        # need to account for zero singles, and only tens
+
+    return str(hundredsValue) + " " + str(tensValue) + " " + str(onesValue)
+
+
+print(num_to_word(612))
+print(num_to_word(52))
+"""
+for i in (range(25)):
+    print(number_to_word(i))
+"""
