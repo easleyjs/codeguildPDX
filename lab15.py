@@ -21,7 +21,7 @@ Version 4 (optional)
 Convert a time given in hours and minutes to a phrase.
 """
 # import math
-one_to_twenty_dict = {
+one_to_teens_dict = {
                 1: 'one',
                 2: 'two',
                 3: 'three',
@@ -57,42 +57,28 @@ tens_dict = {
 }
 
 
-def num_to_word(inputNumber):
-    hundredsValue = tensValue = onesValue = 0
+def num_to_words(inputNumber):
+    hundredsValue = tensAndOnes = tensValue = onesValue = 0
     numWords = ""
+    tensAndOnes = inputNumber % 100
+    if inputNumber == 0:
+        return "zero"
     if inputNumber > 99:
-        numWords += one_to_twenty_dict[inputNumber//100] + " hundred "
-        tensValue = inputNumber % 100
-        onesValue = inputNumber % 100 % 10
-        if 10 < (onesValue + 10) < 20:
-            numWords = one_to_twenty_dict[onesValue + 10]
-        else:
-            tensValue = inputNumber % 100 // 10
-            if tensValue != 0:
-                numWords += one_to_twenty_dict[tensValue]
-            if onesValue != 0:
-                numWords += one_to_twenty_dict[onesValue]
-    elif inputNumber <= 20:
-        numWords += one_to_twenty_dict[inputNumber]
-
-    """
-    if 10 < (tensValue * 10 + onesValue) < 20:
-        numWords += _dict[10 + onesValue]
-    else:
-        if tensValue > 0:
-            numWords += tens_dict[tensValue]
-        if onesValue > 0:
-            numWords += singles_dict[onesValue]
-    """
+        hundredsValue = inputNumber//100
+        numWords += one_to_teens_dict[hundredsValue] + " hundred "
+    if 0 < tensAndOnes < 20:
+        numWords += one_to_teens_dict[tensAndOnes]
+    if 20 <= tensAndOnes <= 99:
+        tensValue = tensAndOnes // 10
+        onesValue = inputNumber % 10
+        numWords += tens_dict[tensValue] + (" " + one_to_teens_dict[onesValue] if onesValue > 0 else '')
     return numWords
-    # print(f"{tensValue} {onesValue}")
-    # print(teens_dict[tensValue * 10 + onesValue])
 
 
-# print(num_to_word(612))
-print(num_to_word(13))
-# num_to_word(13)
-"""
-for i in (range(25)):
-    print(num_to_word(i))
-"""
+def main():
+    inputNumber = input("Enter a number between 0-999: ")
+    print(num_to_words(inputNumber))
+
+
+if __name__ == 'main':
+    main()
