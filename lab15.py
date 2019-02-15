@@ -20,8 +20,8 @@ Version 4 (optional)
 
 Convert a time given in hours and minutes to a phrase.
 """
-import math
-singles_dict = {
+# import math
+one_to_twenty_dict = {
                 1: 'one',
                 2: 'two',
                 3: 'three',
@@ -30,7 +30,18 @@ singles_dict = {
                 6: 'six',
                 7: 'seven',
                 8: 'eight',
-                9: 'nine'
+                9: 'nine',
+                10: 'ten',
+                11: 'eleven',
+                12: 'twelve',
+                13: 'thirteen',
+                14: 'fourteen',
+                15: 'fifteen',
+                16: 'sixteen',
+                17: 'seventeen',
+                18: 'eighteen',
+                19: 'nineteen'
+
 }
 
 tens_dict = {
@@ -45,57 +56,43 @@ tens_dict = {
                 9: 'ninety'
 }
 
-teens_dict = {
-                11: 'eleven',
-                12: 'twelve',
-                13: 'thirteen',
-                14: 'fourteen',
-                15: 'fifteen',
-                16: 'sixteen',
-                17: 'seventeen',
-                18: 'eighteen',
-                19: 'nineteen'
-}
-
-
-def number_to_word(inputNumber):
-    numberString = onesWord = hundredsWord = ""
-    divHundred = inputNumber / 100
-    modHundred = inputNumber % 100
-    if inputNumber % 100 >= 10:
-        onesWord = double_digit_dict.get((modHundred), tens_dict.get(modHundred / 10, ''))
-    else:
-        onesWord = singles_dict.get(modHundred, '')
-
-    if divHundred > 0:
-        hundredsWord = singles_dict.get(divHundred, '') + " hundred "
-
-    return hundredsWord + onesWord
-
 
 def num_to_word(inputNumber):
     hundredsValue = tensValue = onesValue = 0
     numWords = ""
     if inputNumber > 99:
-        hundredsValue = inputNumber / 100
-        tensValue = inputNumber % 100 / 10
-        onesValue = inputNumber % 10
-        numWords = singles_dict[hundredsValue] + " hundred "
+        numWords += one_to_twenty_dict[inputNumber//100] + " hundred "
+        tensValue = inputNumber % 100
+        onesValue = inputNumber % 100 % 10
+        if 10 < (onesValue + 10) < 20:
+            numWords = one_to_twenty_dict[onesValue + 10]
+        else:
+            tensValue = inputNumber % 100 // 10
+            if tensValue != 0:
+                numWords += one_to_twenty_dict[tensValue]
+            if onesValue != 0:
+                numWords += one_to_twenty_dict[onesValue]
+    elif inputNumber <= 20:
+        numWords += one_to_twenty_dict[inputNumber]
+
+    """
+    if 10 < (tensValue * 10 + onesValue) < 20:
+        numWords += _dict[10 + onesValue]
     else:
-        tensValue = inputNumber / 10
-        onesValue = inputNumber % 10
-    if 10 < (tensValue + onesValue) < 20:
-        numWords += teens_dict[tensValue + onesValue]
-    else:
-        numWords += tens_dict[tensValue]
-        # need to account for zero singles, and only tens
+        if tensValue > 0:
+            numWords += tens_dict[tensValue]
+        if onesValue > 0:
+            numWords += singles_dict[onesValue]
+    """
+    return numWords
+    # print(f"{tensValue} {onesValue}")
+    # print(teens_dict[tensValue * 10 + onesValue])
 
-    return str(hundredsValue) + " " + str(tensValue) + " " + str(onesValue)
 
-
-print(num_to_word(612))
-print(num_to_word(52))
+# print(num_to_word(612))
+print(num_to_word(13))
+# num_to_word(13)
 """
 for i in (range(25)):
-    print(number_to_word(i))
+    print(num_to_word(i))
 """
