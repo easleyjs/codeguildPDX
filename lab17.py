@@ -32,8 +32,6 @@ def check_palindrome(word):
     return f"{word} is a palindrome." if word[::-1] == word else f"{word} is not a palindrome."
 
 
-
-
 def main():
     pass
 
