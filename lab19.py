@@ -32,18 +32,13 @@ cards = {
 
 deck = []
 
-for j in range(4):
-    for i in cards:
-        print(i)
-        deck.append(i)
-
 def get_cards():
     cardOne = cardTwo = cardThree = 0
     advice = ""
     print("Enter cards as: %s" % str(" ".join([str(i) for i in cards])))
-    cardOne = cards.get(input("What is the first card?: "),0)
-    cardTwo = cards.get(input("What is the second card?: "),0)
-    cardThree = cards.get(input("What is the third card?: "),0)
+    cardOne = cards.get(input("What is the first card?: "), 0)
+    cardTwo = cards.get(input("What is the second card?: "), 0)
+    cardThree = cards.get(input("What is the third card?: "), 0)
 
     print(f"{cardOne} {cardTwo} {cardThree}")
     if cardTwo == 11:
@@ -53,12 +48,16 @@ def get_cards():
 
     cardTotal = cardOne + cardTwo + cardThree
 
-    if cardTotal < 17:
+    if cardTotal == 21:
+        advice = "Blackjack."
+    elif cardTotal < 17:
         advice = "Hit."
     elif 21 > cardTotal >= 17:
         advice = "Stay."
+    elif cardTotal > 21:
+        advice = "Bust."
 
-    return f"{cardTotal} {advice}"
+    return f"Card Total: {cardTotal}\nAdvice: {advice}"
 
 
 print(get_cards())
