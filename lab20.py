@@ -10,40 +10,37 @@ Sum all values.
 Take the second digit of that sum.
 If that matches the check digit, the whole card number is valid.
 """
-# testCard = '4563670208287350'
-testCard = '4556737586899855'
-print(len(testCard))
-# inputCard = input("Enter the 16-digit card number: ")
-inputCard = testCard
 
 
 def checkCard(cardString):
     cardIntList = [int(i) for i in cardString]
     checkDigit = cardIntList.pop()
-    # print(checkDigit)
-    # print(len(cardIntList))
     reversedCardIntList = list(reversed(cardIntList))
-    # print(len(reversedCardIntList))
-    cardSumList = []
-    # oddItems = reversedCardIntList[1::2]
-
+    cardSum = 0
+    counter = 1
     for i in range(len(reversedCardIntList)):
-        if i % 2 == 1:
-            # print(i)
+        if counter % 2 == 1:
             doubledValue = reversedCardIntList[i]*2
-            print(doubledValue)
-            cardSumList.append(doubledValue) if doubledValue < 10 else cardSumList.append(doubledValue - 9)
+            if doubledValue > 9:
+                cardSum += doubledValue - 9
+            else:
+                cardSum += doubledValue
         else:
-            cardSumList.append(reversedCardIntList[i])
+            cardSum += reversedCardIntList[i]
+        counter += 1
 
-    print(sum(cardSumList))
-    """
-    if str(cardSumList)[1] == checkDigit:
+    cardCheckSum = int(str(cardSum)[-1])
+
+    if cardCheckSum == checkDigit:
         return "Valid."
     else:
         return "Invalid."
-    """
 
-print(checkCard(inputCard))
 
-#print(cardIntList)
+def main():
+    inputCard = input("Enter the 16-digit card number: ")
+    print(f"Card is {checkCard(inputCard)}")
+
+
+if __name__ == '__main__':
+    main()
