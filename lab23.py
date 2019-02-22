@@ -21,31 +21,117 @@ def getContactsFromFile(contactsFile):
     return [dict(zip(header, lines[i].split(","))) for i in range(1, len(lines))]
 
 
+def contactSearch(contacts, contactName):
+    #print(len(contacts))
+    for i in range(len(contacts)):
+        #print(contacts[i]['name'])
+        #print(i)
+        if contacts[i]['name'] == contactName:
+            return i
+
+
 def createContact(contacts):
+    print(f"{'*'*30} New Contact {'*'*30}")
     contactName = input("Contact Name: ")
     contactEmail = input("Contact Email: ")
     contactPhone = input("Contact Phone: ")
-    contacts.append(dict('name'=contactName, 'email'=contactEmail, 'phone'=contactPhone))
+    # contactDict = dict()
+    contacts.append({'name': contactName, 'email': contactEmail, 'phone': contactPhone})
     return contacts
 
 
-def removeContact(contacts, contactName):
-    pass
+def retrieveContact(contacts, contactName):
+    contactId = contactSearch(contacts, contactName)
+    if contactId:
+        print(f"{'*'*30} Found Contact {'*'*30}")
+        print(f"Name: {contacts[contactId]['name']}")
+        print(f"Email: {contacts[contactId]['email']}")
+        print(f"Phone: {contacts[contactId]['phone']}")
+    else:
+        print(f"Contact '{contactName}' not found.")
 
 
 def updateContact(contacts, contactName):
-    pass
+    contactUpdated = False
+    contactId = contactSearch(contacts, contactName)
+    if contactId:
+        print(f"{'*'*30} Found Contact {'*'*30}")
+        print(f"{'*'*30} Current Details: {'*'*30}")
+        print(f"(1) Name: {contacts[contactId]['name']}")
+        print(f"(2) Email: {contacts[contactId]['email']}")
+        print(f"(3) Phone: {contacts[contactId]['phone']}")
+        print(f"{'*'*30} End of Details. {'*'*30}")
+        attribNumber = int(input("Enter number of the attribute you want to change: "))
+        newValue = input("New value for the attribute: ")
+        if attribNumber == 1:
+            contacts[contactId]['name'] = newValue
+            contactUpdated = True
+        elif attribNumber == 2:
+            contacts[contactId]['email'] = newValue
+            contactUpdated = True
+        elif attribNumber == 3:
+            contacts[contactId]['phone'] = newValue
+            contactUpdated = True
+        else:
+            print("Invalid attribute.")
+        if contactUpdated:
+            print("Contact Updated.")
+    else:
+        print(f"Contact '{contactName}' not found.")
+    return contacts
 
 
 def deleteContact(contacts, contactName):
-    pass
+    contactRemoved = False
+    for i in range(len(contacts)):
+        if contacts[i]['name'] == contactName:
+            contacts.remove(i)
+            contactRemoved = True
+    if contactRemoved:
+        print(f"Contact '{contactName}' was removed.")
+    else:
+        print(f"Contact '{contactName}' was not found.")
+    return contacts
 
 
 def writeContactsToFile(contactsFile):
-    with open(contactsFile, 'r') as file:
-        pass
+    with open(contactsFile, 'w') as file:
+        file.write(','.join(contacts[0].keys()))
+        file.write('\n')
+        for contact in contacts:
+            file.write(','.join(contact.values()))
+            file.write('\n')
 
 
-contacts = getContactsFromFile('contacts.csv')
+contactsFile = 'contacts.csv'
+contacts = getContactsFromFile(contactsFile)
+requiresContactName = ['U', 'D', 'R']
 
-print(contacts)
+print(f"{'*'*30} EasleyContact Pro v3.1.3.3.7 {'*'*30}")
+while True:
+    print("\nCommands: (C)reate a new contact (R)etrieve contact (U)pdate (D)elete -- (W)rite contact file (Q)uit")
+    command = input("Enter command: ").upper()
+    if command in requiresContactName:
+        contactName = input("Enter contact name: ")
+
+    if command == 'C':
+        contacts = createContact(contacts)
+    elif command == 'R':
+        retrieveContact(contacts, contactName)
+    elif command == 'U':
+        contacts = updateContact(contacts, contactName)
+    elif command == 'D':
+        contacts = deleteContact(contacts, contactName)
+    elif command == 'W':
+        writeContactsToFile(contactsFile)
+    elif command == 'Q':
+        break
+
+"""
+for contact in contacts:
+    print(','.join(contact.values()))
+"""
+#retrieveContact(contacts,'Zardoz')
+#print(contacts[0]['name'])
+#print(contacts[2]['name'])
+#print(contacts[contactSearch(contacts, 'Zardoz')]['email'])
