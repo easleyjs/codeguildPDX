@@ -22,10 +22,7 @@ def getContactsFromFile(contactsFile):
 
 
 def contactSearch(contacts, contactName):
-    #print(len(contacts))
     for i in range(len(contacts)):
-        #print(contacts[i]['name'])
-        #print(i)
         if contacts[i]['name'] == contactName:
             return i
 
@@ -83,10 +80,10 @@ def updateContact(contacts, contactName):
 
 def deleteContact(contacts, contactName):
     contactRemoved = False
-    for i in range(len(contacts)):
-        if contacts[i]['name'] == contactName:
-            contacts.remove(i)
-            contactRemoved = True
+    contactId = contactSearch(contacts, contactName)
+    if contactId:
+        contacts.remove(contactId)
+        contactRemoved = True
     if contactRemoved:
         print(f"Contact '{contactName}' was removed.")
     else:
@@ -126,12 +123,3 @@ while True:
         writeContactsToFile(contactsFile)
     elif command == 'Q':
         break
-
-"""
-for contact in contacts:
-    print(','.join(contact.values()))
-"""
-#retrieveContact(contacts,'Zardoz')
-#print(contacts[0]['name'])
-#print(contacts[2]['name'])
-#print(contacts[contactSearch(contacts, 'Zardoz')]['email'])
