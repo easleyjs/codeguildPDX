@@ -31,16 +31,16 @@ class ATM():
         self.menu = """
                         (W)ithdraw
                         (D)eposit
-                        (C)heck Balance
                         (L)ist Transactions"""
 
-    def print_menu(self):
-        print(f"{'*'*30} {self.machineName} {'*'*30}")
-        print(f"{self.menu}")
-        print(f"Balance: ${self.balance}")
+    def __repr__(self):
+        atmMenu = '*'*30 + self.machineName + '*'*30 + "\n"
+        atmMenu += self.menu + "\n"
+        atmMenu += "\nBalance: $" + f"{self.balance}" + "\n"
+        return atmMenu
 
     def get_input(self):
-        return input("Enter command [C / D / L / W]: ")
+        return input("Enter command [D / L / W]: ")
 
     def check_balance(self):
         return self.balance
@@ -64,14 +64,32 @@ class ATM():
         self.transactions.append(transaction)
 
     def list_transactions(self):
-        print(self.transactions)
+        print("\n".join(self.transactions))
 
 
 def main():
     myAtm = ATM(250)
-    myAtm.print_menu()
-
-    print(myAtm.check_balance())
+    continueSession = True
+    while continueSession:
+        print(myAtm)
+        # print(f"\nBalance: {myAtm.check_balance()}")
+        command = input("Command (Enter 'x' to end session): ")
+        if command == 'd':
+            depositAmount = int(input("Enter deposit amount: "))
+            myAtm.deposit(depositAmount)
+            print(f"Recieved deposit of ${depositAmount}")
+        elif command == 'w':
+            withdrawlAmount = int(input("Enter withdrawl amount: "))
+            myAtm.withdraw(withdrawlAmount)
+            print(f"Withdrew ${withdrawlAmount}")
+        elif command == 'l':
+            print("Transactions:\n")
+            myAtm.list_transactions()
+        elif command == 'x':
+            print("Thank you for using the EasleyTech MoCash 5000. Goodbye.")
+            continueSession = False
+        else:
+            print("\nYou have entered invalid input into the EasleyTech MoCash 5000.")
 
 if __name__ == '__main__':
     main()
