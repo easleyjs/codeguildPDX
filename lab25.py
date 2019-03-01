@@ -72,7 +72,6 @@ def main():
     continueSession = True
     while continueSession:
         print(myAtm)
-        # print(f"\nBalance: {myAtm.check_balance()}")
         command = input("Command (Enter 'x' to end session): ")
         if command == 'd':
             depositAmount = int(input("Enter deposit amount: "))
