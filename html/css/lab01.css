@@ -1,0 +1,22 @@
+body {
+  margin: auto;
+  width: 60%;
+  background: black;
+  color: #ffd633;
+}
+p {
+  margin: 10px;
+}
+.float-img {
+  float: right;
+  border-radius: 10px;
+}
+#quote {
+  font-family: cursive;
+}
+li {
+  list-style: none;
+}
+li:before {
+  content: "> ";
+}
