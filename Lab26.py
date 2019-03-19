@@ -58,7 +58,11 @@ class Game():
         for i in range(len(self.board)):
             horizontalString = self.board[i][0] + self.board[i][1] + self.board[i][2]
             verticalString = self.board[0][i] + self.board[1][i] + self.board[2][i]
-        if (horizonString == self.token*3) or :
+            if (horizontalString == self.token*3) or (verticalString == self.token*3):
+                return self.token + " has won."
+        leftLine = self.board[0][0] + self.board[1][1] + self.board[2][2]
+        rightLine = self.board[2][0] + self.board[1][1] + self.board[0][2]
+        
 
 class Player():
     def __init__(self, playerName, token):
