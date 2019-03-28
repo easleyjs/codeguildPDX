@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  overflow: !hidden;
+  overflow: hidden !important;
 }
 
 ul {
@@ -38,8 +38,9 @@ h1 {
 }
 
 .article {
-  height: 480px;
-  width: 480px;
+  padding: 0px 10px 0px 10px;
+  height: 460px;
+  width: 460px;
 }
 
 .flex-container {
