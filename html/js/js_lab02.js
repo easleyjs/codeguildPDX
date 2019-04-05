@@ -1,53 +1,41 @@
-let coins = {
-	Quarters:25,
-	Dimes:10,
-	Nickels:5,
-	Pennies: 1
+function customCoin (coinName, coinAmount, coins) {
+	coins[coinName] = coinAmount
+	return coins
 }
 
+function makeChange(totalAmount, coins) {
+	remainderAmt = totalAmount
+	coinObjArr = []
 
+	valueList = Object.values(coins).sort((a,b) => {return b - a}) // Creates a descending array of coin values
+	valueList.forEach(elem => {
+		amtInt = Math.floor(remainderAmt / elem)
+		remainderAmt -= amtInt * elem
 
-/*
-import math
-
-coins = {
-            "Quarters":25,
-            "Dimes":10,
-            "Nickels":5,
-            "Pennies":1
+		Object.keys(coins).forEach(coin => {
+			if (coins[coin] === elem) {
+				coinObjArr.push({ name:coin, amount:amtInt }) //need to do change computation above
+			}
+		})
+	})
+	return coinObjArr
 }
 
-def customCoin(coinName,coinAmount,coins):
-    coins[coinName] = coinAmount
-    return coins
+const coins = {
+	quarters:25,
+	dimes:10,
+	nickels:5,
+	pennies: 1
+}
 
-def makeChange(totalAmount,coins):
-    remainderAmount = totalAmount
-    coinAmount = 0
-    print("Total Amount: $" + str(totalAmount/100))
+//Display results/change to output div
+document.addEventListener("keyup", (evt) => {
+	outputDiv = document.querySelector("#output_div")
+	outputDiv.innerHTML = ""
+	amtInput = document.querySelector("#cash_amt").value
+	changeObjs = makeChange(amtInput, coins)
+	changeObjs.forEach(elem => {
+		outputDiv.innerHTML += '<p class="results">' + elem.amount + " " + elem.name + "</p>"
+	})
 
-    for coin in sorted(coins,reverse=True):
-        coinAmount = math.floor(remainderAmount /coins[coin])
-        print(coin + ": " + str(coinAmount))
-        remainderAmount -= coinAmount*coins[coin]
-
-inputAmount = float(input("Enter the total amount in pennies (i.e. 135 for $1.35): "))
-makeCustomCoins = input("Would you like to input any custom coins? [y/n]: ")
-if makeCustomCoins == 'y':
-    continueCustomCoins = True
-    while continueCustomCoins is True:
-        customCoinAmount = int(input("What is the custom coins value in pennies?: "))
-        customCoinName = input("What is the plural name for the coin [e.g. 'Dubloons']: ")
-        coins = customCoin(customCoinName,customCoinAmount,coins)
-        makeCustomCoins = input("Continue adding custom coins? [y/n]: ")
-        if makeCustomCoins == 'n':
-            continueCustomCoins = False
-        else:
-            continue
-else:
-    pass
-
-#All optional custom coins should be entered. Make change and display.
-makeChange(inputAmount,coins)
-*/
-
+})
