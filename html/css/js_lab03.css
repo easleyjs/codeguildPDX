@@ -1,0 +1,45 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#output_div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 85vh;
+}
+
+#output_div, header {
+  align-items: center;
+  text-align: center;
+}
+
+.row {
+  height: 50px;
+  margin: 0 100px 0 100px;
+}
+
+.col {
+  height: 50px;
+  width: 50px;
+  float: left;
+  border: 1px solid black;
+}
+
+.fill {
+  background-color: black;
+}
+
+.peak {
+  background-color: yellow;
+}
+
+.valley {
+  background-color: green;
+}
+
+.water {
+  background-color: #B2D6FF;
+}
