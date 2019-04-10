@@ -28,7 +28,32 @@ class ToDoList {
       deleteBtn.setAttribute('class', 'delete')
       toggleBtn.innerHTML = '<i class="fas fa-check"></i>'
       toggleBtn.setAttribute('class', 'toggle')
-      
+
+/*
+      // set elem with text
+elem.innerText = text
+
+// attach buttons to elem
+elem.appendChild(deleteBtn)
+elem.appendChild(toggleBtn)
+
+// btn event listeners
+deleteBtn.addEventListener('click', (evt) => {
+  const li = evt.target.closest('li')
+  const idx = parseInt(li.getAttribute('idx'))
+  todoList.deleteTodo(idx)
+  update(todoList)
+})
+
+toggleBtn.addEventListener('click', (evt) => {
+  const li = evt.target.closest('li')
+  const idx = li.getAttribute('idx')
+  todoList.toggleComplete(idx)
+  update(todoList)
+})
+*/
+
+
       displayList.insertBefore( taskItem, displayList.childNodes[0] );
       //might need parentNode later.
     })
