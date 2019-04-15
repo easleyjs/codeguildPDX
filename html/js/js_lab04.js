@@ -17,7 +17,7 @@ class ToDoList {
   createTaskElem (name, idx, displayList) {
     let taskItem = document.createElement("li")
     taskItem.innerHTML = name
-    taskItem.setAttribute("idx", idx)  // need to look at how to get array index #
+    taskItem.setAttribute("idx", idx)
     const deleteBtn = document.createElement("a")
     const toggleBtn = document.createElement("a")
     deleteBtn.innerHTML = '<i class="fas fa-times"></i>'
@@ -32,9 +32,7 @@ class ToDoList {
     deleteBtn.addEventListener('click', (evt) => {
       const li = evt.target.closest('li')
       const idx = parseInt(li.getAttribute('idx'))
-      //todoList.deleteTodo(idx)
       myToDos.removeTask(idx)
-      //update(todoList)
     })
 
     toggleBtn.addEventListener('click', (evt) => {
@@ -43,7 +41,6 @@ class ToDoList {
       this.toggleTask(idx)
     })
     return taskItem
-    //displayList.insertBefore( taskItem, displayList.childNodes[0] );
   }
 
   toggleTask = (idx) => {
@@ -66,9 +63,7 @@ class ToDoList {
       displayList.insertBefore( taskItem, displayList.childNodes[0] );
     })
   }
-
 }
-      //might need parentNode later.
 
 const myToDos = new ToDoList()
 const inputField = document.querySelector("#to_do")
