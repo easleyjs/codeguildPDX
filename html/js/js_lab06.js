@@ -26,22 +26,38 @@ function clockUpdate() {
     setTimeout(clockUpdate,500)
 }
 
-function setCurrentTime() {
-  let now = new Date();
-  let currentHour = now.getHours()
-  let currentMinutes = now.getMinutes()
-  let currentSeconds = now.getSeconds()
+function updateTime() {
+  let startTime = new Date();
+  let diff = 0
+  let currentSeconds = startTime.getSeconds()
 
-  if (currentHour > 12) {
-    currentHour -= 12
-    clockAmpm.innerText = "PM"
-  } else {
-    clockAmpm.innerText = "AM"
-  }
-  currentHour = currentHour >= 10 ? currentHour : 0 + currentHour
-  clockHours.innerText = currentHour
-  clockMinutes.innerText = currentMinutes >= 10 ? currentMinutes : "0"+currentMinutes
-  clockSeconds.innerText = currentSeconds >= 10 ? currentSeconds : "0"+currentSeconds
+
+    /*
+    diff = Math.floor(Date.now() - startTime/1000)
+    currentSeconds = (diff % 60) | 0
+    console.log(currentSeconds);
+    //let currentHour = now.getHours()
+    //let currentMinutes = now.getMinutes()
+    //let currentSeconds = now.getSeconds()
+  */
+  /*
+    if (currentHour > 12) {
+      currentHour -= 12
+      clockAmpm.innerText = "PM"
+    } else {
+      clockAmpm.innerText = "AM"
+    }
+    currentHour = currentHour >= 10 ? currentHour : 0 + currentHour
+    clockHours.innerText = currentHour
+    clockMinutes.innerText = currentMinutes >= 10 ? currentMinutes : "0"+currentMinutes
+  */
+    /*
+    diff++
+    currentSeconds = (currentSeconds + diff) % 60
+    */
+    clockSeconds.firstChild.nodeValue = currentSeconds >= 10 ? currentSeconds : "0"+currentSeconds
+    //clearInterval(updateTime)
+
 
 }
-setInterval(setCurrentTime,1000);
+//setInterval(updateTime,1000);
