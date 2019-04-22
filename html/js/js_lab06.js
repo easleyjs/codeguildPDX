@@ -1,63 +1,66 @@
-let now = new Date();
-const clockColons = document.querySelectorAll(".colon")
-const clockHours = document.querySelector("#clock-hours")
-const clockAmpm = document.querySelector("#clock-ampm")
-const clockMinutes = document.querySelector("#clock-minutes")
-const clockSeconds = document.querySelector("#clock-seconds")
-let ctr = 1;
+Vue.component('clock-face', {
+  props: ['time'],
+  data: function(){
+    return{
+      rawHour:"",
+      rawMinutes:"",
+      rawSeconds:"",
+      minutes:"",
+      hours:"",
+      seconds:"",
+      ampm:"",
+    };
+  },
+  template: `<div id="clock">
+              <span class="lcd number">{{ hours }}</span>
+              <span class="lcd colon">:</span>
+              <span class="lcd number">{{ minutes }}</span>
+              <span class="lcd colon">:</span>
+              <span class="lcd number">{{ seconds }}</span>
+              <span id="ampm" class="lcd">{{ ampm }}</span>
+            </div>
+            `,
+mounted(){
+  this.clockUpdate();
+  this.interval = setInterval(() => {
+      this.clockUpdate();
+  }, 1000);
+  this.colonInterval = setInterval(() => {
+    this.colonBlink();
+  }, 900);
+},
+methods: {
+    clockUpdate: function() {
+      let now = new Date()
+      //console.log(now.getHours())
 
-function clockUpdate() {
-    clockColons.forEach((colon) => {
-      if (colon.style.opacity === "0") {
-        colon.style.opacity = "1"
-      } else {
-        colon.style.opacity = "0"
-      }
-    })
-    /*
-    if (ctr === 0) {
-      now.setSeconds(now.getSeconds() +1)
-      setCurrentTime();
-      ctr += 1
-    } else {
-      ctr--
+      this.rawHour = parseInt(now.getHours())
+      this.rawMinutes = now.getMinutes()
+      this.rawSeconds = now.getSeconds()
+      //console.log("0" + this.rawHour)
+
+      this.hours = this.rawHour > 9 ? this.rawHour : "0" + this.rawHour
+      this.minutes = this.rawMinutes > 9 ? this.rawMinutes : "0" + this.rawMinutes
+      this.seconds = this.rawSeconds > 9 ? this.rawSeconds : "0" + this.rawSeconds
+      this.ampm = this.rawHour > 12 ? "PM" : "AM"
+
+    },
+    colonBlink: function() {
+      this.clockColons = document.querySelectorAll(".colon")
+      //console.log(clockColons[0])
+      this.clockColons.forEach((colon) => {
+        //console.log(colon)
+        if (colon.style.opacity === "0") {
+          colon.style.opacity = "1"
+        } else {
+          colon.style.opacity = "0"
+        }
+      })
     }
-    */
-    setTimeout(clockUpdate,500)
 }
+});
 
-function updateTime() {
-  let startTime = new Date();
-  let diff = 0
-  let currentSeconds = startTime.getSeconds()
-
-
-    /*
-    diff = Math.floor(Date.now() - startTime/1000)
-    currentSeconds = (diff % 60) | 0
-    console.log(currentSeconds);
-    //let currentHour = now.getHours()
-    //let currentMinutes = now.getMinutes()
-    //let currentSeconds = now.getSeconds()
-  */
-  /*
-    if (currentHour > 12) {
-      currentHour -= 12
-      clockAmpm.innerText = "PM"
-    } else {
-      clockAmpm.innerText = "AM"
-    }
-    currentHour = currentHour >= 10 ? currentHour : 0 + currentHour
-    clockHours.innerText = currentHour
-    clockMinutes.innerText = currentMinutes >= 10 ? currentMinutes : "0"+currentMinutes
-  */
-    /*
-    diff++
-    currentSeconds = (currentSeconds + diff) % 60
-    */
-    clockSeconds.firstChild.nodeValue = currentSeconds >= 10 ? currentSeconds : "0"+currentSeconds
-    //clearInterval(updateTime)
-
-
-}
-//setInterval(updateTime,1000);
+var clockApp = new Vue({
+  el: '#clock-app',
+  data: {}
+})

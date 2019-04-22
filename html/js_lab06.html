@@ -1,71 +1,21 @@
-<!--
-Next make a stopwatch. Start with a button that says 'start'. You can then create a date to keep track of the time, and use setHours(0,0,0,0). This function will set the date's time to 0 hours, 0 minutes, 0 seconds, and 0 milliseconds. Then set an interval to add 1 to the seconds of that date every second, and show the time in an html element. Add a 'lap' button which takes takes the current time and shows it in a separate list. E.g.
-
-Lap 1: 00:01:03
-Lap 2: 00:02:34
-Lap 3: 00:04:21
-
-Next make a countdown timer. The countdown timer should have a text input for the time, and a drop-down list for the units
-(seconds, minutes, hours). Set an interval which will start a date at the given time, and decrement the seconds each second.
-The countdown timer should alert the user when it's finished (using an alert("time's up") or changing the background color, etc).
--->
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>JS LAB 06 - Clock</title>
-    <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet'>
+    <title>JS Lab 06</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <link rel="stylesheet" href="/css/js_lab06.css">
   </head>
   <body>
-    <header>
-      JS LAB 06 - Clock
-    </header>
-    <div id="parent">
-        <div id="option-div">
-          <a href="#" class="option">Clock</a>
-          <a href="#" class="option">Stopwatch</a>
-          <a href="#" class="option">Countdown</a>
-        </div>
-        <!--div id="title-div">
-          Clock
-        </div-->
-        <!--div id="input-div" class="child">
-          <input type="text" id="timer-input" value="Input number of seconds..">
-        </div-->
-        <div id="clock-container" class="">
-          <div id="clock-div" class="child">
-            <div id="clock-display-div" class="child">
-              <span id="clock-hours" class="lcd child"></span>
-              <span id="clock-colon" class="lcd child colon">:</span>
-              <span id="clock-minutes" class="lcd child"></span>
-              <span id="clock-colon" class="lcd child colon">:</span>
-              <span id="clock-seconds" class="lcd child">&nbsp;</span>
-              <span id="clock-ampm" class="lcd child"></span>
-            </div>
-          </div>
-        </div>
-
-        <div id="timer-container" class="">
-          <div id="timer-div" class="child">
-            <div id="timer-display-div" class="child pc-background">
-                <span id="timer-minutes" class="lcd child">00</span>
-                <span id="timer-colon" class="lcd child">:</span>
-                <span id="timer-seconds" class="lcd child">54</span>
-            </div>
-            <div id="button-div" class="child">
-              <button id="start-btn" class="stopwatch-btns" type="button" name="button">Start</button>
-              <button id="lap-btn" class="stopwatch-btns" type="button" name="button">Lap</button>
-              <button id="stop-btn" class="stopwatch-btns" type="button" name="button">Stop</button>
-            </div>
-        </div>
-          <div id="list-div">
-            <ul id="lap-list">
-              <li>Lap #1 - 00:00</li>
-            </ul>
-          </div>
-        </div>
+    <div class="container">
+      <header>
+        <span>JS LAB 06 - Clock</span>
+      </header>
+      <div id="clock-app" class="time-output">
+        <clock-face
+        >
+        </clock-face>
+      </div>
     </div>
     <script type="text/javascript" src="js/js_lab06.js"></script>
   </body>
