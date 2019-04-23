@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>JS Lab 07</title>
+
+    <style media="screen">
+      .container {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+        "header"
+        "text";
+        align-items: center;
+        justify-content: center;
+      }
+      header {
+        grid-area: header;
+        display: flex;
+      }
+      .text-display {
+        grid-area: text;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="container">
+      <header>
+        JS Lab 07 - HackerTyper
+      </header>
+      <div class="text-display">
+
+      </div>
+    </div>
+    <script src="js/js_lab07.js"></script>
+  </body>
+</html>
