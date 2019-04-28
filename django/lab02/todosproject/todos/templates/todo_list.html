@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>TO-DO LIST</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/site.css' %}">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  </head>
+  <body>
+    <div id="app">
+        <div class="page-header">
+            <div id="csrf-div">
+              {% csrf_token %}
+            </div>
+            <h1 class="lab-title">Django Lab 02</h1>
+            <h1 class="lab-title">To-Do List</h1>
+        </div>
+        <div id="input-bar">
+            <input type="text" id="todo-input" name="todoInput" value="Enter a new task.."/>
+        </div>
+        <div id="todo-container" class="content container"></div>
+    </div>
+    <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+  </body>
+</html>
