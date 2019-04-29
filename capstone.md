@@ -1,4 +1,4 @@
-w3.bbs - A Tribute to 90's PC Bulletin Board Systems (BBSes)
+w3.bbs - A tribute to 90's PC Bulletin Board Systems (BBSes)
 ============================================================
 
 ## By J. Easley  
@@ -20,7 +20,7 @@ Data Models
 
 Schedule
 --Week 1: Multi-User Message List
-----Unstyled HTML in place, Models created, User creation/multi-user working, Message Board topic areas and individual messages accessible.
+----Un-styled HTML in place, Models created, User creation/multi-user working, Message Board topic areas and individual messages accessible.
 ----Possibly, messages/topic areas rendered with vanilla JS for proof-of-concept/testing the models.
 
 --Week 2: Main Menu, Enhanced message controls, AJAX functionality.
@@ -33,9 +33,9 @@ Schedule
 ----Retro "DOS"/ANSI styling of existing HTML
 ----Keyboard navigation/hotkeys implemented
 
---Week 4: Additonal Features, Testing
+--Week 4: Additional Features, Testing
 ----If time permits, will implement some of the features in "Really great to have(s)"
-----Testing to ensure that all planned features were sucessfully implemented.
+----Testing to ensure that all planned features were successfully implemented.
 
 --Essential Features:
 * User system/authentication system
@@ -49,4 +49,4 @@ Schedule
 --Nice-to-have:
 * Files (downloads section)
 * Chat Room
-* Additonal games
+* Additional games
