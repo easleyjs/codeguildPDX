@@ -1,0 +1,42 @@
+*, html {
+  border: 0;
+  margin: 0;
+}
+
+.input-div {
+  margin-top: 10%;
+  width: 100%;
+  /*grid-area: input-bar;*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #17afa7;
+}
+
+#long-url {
+  height: 40px;
+  width: 40%;
+  margin: 10px;
+  border: 0px solid #ffffff;
+  border-radius: 50px;
+  text-align: center;
+  font-size: 1.2em;
+  font-family: sans-serif;
+  color: lightgrey;
+}
+
+#content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+a, p {
+  margin-top: 2%;
+  font: 1.5em sans-serif;
+}
+
+p {
+  margin-right: 10px;
+}
